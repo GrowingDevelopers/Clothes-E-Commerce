@@ -1,4 +1,4 @@
-package clothes.ecommerce.user;
+package clothes.ecommerce.domain.user;
 
 /**
  * UserRepository의 구현체

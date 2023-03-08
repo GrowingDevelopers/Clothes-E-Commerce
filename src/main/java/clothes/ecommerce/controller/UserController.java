@@ -1,7 +1,7 @@
 package clothes.ecommerce.controller;
 
-import clothes.ecommerce.user.User;
-import clothes.ecommerce.user.UserRepository;
+import clothes.ecommerce.domain.user.User;
+import clothes.ecommerce.domain.user.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

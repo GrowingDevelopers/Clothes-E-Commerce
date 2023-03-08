@@ -1,4 +1,4 @@
-package clothes.ecommerce.user;
+package clothes.ecommerce.domain.user;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
