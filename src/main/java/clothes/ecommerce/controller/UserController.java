@@ -1,34 +1,29 @@
 package clothes.ecommerce.controller;
 
 import clothes.ecommerce.domain.user.User;
-import clothes.ecommerce.domain.user.UserRepository;
+import clothes.ecommerce.domain.user.UserMapper;
+import clothes.ecommerce.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
-    private UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    /**
+     *  회원가입 진행
+     * @return 회원가입 완료
+     */
+    @PostMapping("/signup")
+    public String signUp(@RequestBody User user) {
+        userService.joinUser(user);
 
-    @GetMapping("/user")
-    public String userTest() {
-        User user = new User();
-
-        user.setUserNumber(1L);
-        user.setUserName("최서웅");
-        user.setUserId("cyr0331");
-        user.setUserPassword("1234");
-        user.setBankAccount("하나은행 620-252096-791");
-        user.setUserAddress("서울특별시 구로구 구로동");
-        user.setBankAccountAmount(new BigDecimal(500000));
-
-        userRepository.save(user);
-
-        return "Ok";
+        return "회원가입이 완료되었습니다.";
     }
 }
