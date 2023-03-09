@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 
+/**
+ * 사용자(회원) controller
+ */
+
 @RestController
 @RequiredArgsConstructor
 public class UserController {
