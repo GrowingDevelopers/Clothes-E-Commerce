@@ -9,6 +9,10 @@
         select * from users where userName = #{userName}
     </select>
 
+    <select id="findByUserId" resultType="User" parameterType="String">
+        select * from users where userId = #{userId}
+    </select>
+
     <select id="findAll" resultType="User">
         select * from users
     </select>
@@ -26,4 +30,8 @@
                          bankAccount = #{bankAccount},
                          bankAccountAmount = #{bankAccountAmount} where userNumber = #{userNumber}
     </update>
+
+    <delete id="deleteUser" parameterType="Long">
+        delete from users where userNumber = #{userNumber}
+    </delete>
 </mapper>
