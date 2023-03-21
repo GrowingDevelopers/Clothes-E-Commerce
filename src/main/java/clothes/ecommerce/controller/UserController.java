@@ -127,8 +127,8 @@ public class UserController {
      * @return 유저의 전체 정보 조회
      */
 
-    @GetMapping("/search")
-    public List<User> searchAll() {
+    @GetMapping("/search/user")
+    public List<User> searchUserAll() {
         return userService.findUserAll();
     }
 
@@ -137,10 +137,10 @@ public class UserController {
      *
      * @return 유저 정보 갱신 완료
      */
-    @PostMapping("/update")
+    @PostMapping("/update/user")
     public String update(@RequestBody User user) {
         userService.updateUserByUserNumber(user);
-        return "정보가 갱신되었습니다.";
+        return "유저 정보가 갱신되었습니다.";
     }
 
     /**
@@ -151,6 +151,6 @@ public class UserController {
     @PostMapping("/delete/userNumber")
     public String delete(@RequestBody Long userNumber) {
         userService.deleteUserByUserNumber(userNumber);
-        return "정보가 삭제되었습니다.";
+        return "유저 정보가 삭제되었습니다.";
     }
 }

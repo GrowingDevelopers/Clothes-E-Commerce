@@ -10,11 +10,11 @@ import java.math.BigDecimal;
 
 @Data
 public class Product {
-    Long productNumber; // 상품 번호
-    BigDecimal price; // 상품 가격
-    Long productStock; // 상품의 재고 수량
-    String productName; // 상품 명
-    String size; // 상품의 사이즈
-    String color; // 상품의 컬러
-    Long productSellAmount; // 상품의 판매 수량
+    private Long productNumber; // 상품 번호
+    private BigDecimal price; // 상품 가격
+    private Long productStock; // 상품의 재고 수량
+    private String productName; // 상품 명
+    private String size; // 상품의 사이즈
+    private String color; // 상품의 컬러
+    private Long productSellAmount; // 상품의 판매 수량
 }
