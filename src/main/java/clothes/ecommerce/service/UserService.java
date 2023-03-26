@@ -2,9 +2,8 @@ package clothes.ecommerce.service;
 
 import clothes.ecommerce.domain.user.User;
 import clothes.ecommerce.domain.user.UserMapper;
-import clothes.ecommerce.message.Message;
+import clothes.ecommerce.responseentity.Message;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

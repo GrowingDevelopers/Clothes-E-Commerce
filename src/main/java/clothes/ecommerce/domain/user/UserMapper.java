@@ -1,8 +1,7 @@
 package clothes.ecommerce.domain.user;
 
-import clothes.ecommerce.message.Message;
+import clothes.ecommerce.responseentity.Message;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,4 +26,5 @@ public interface UserMapper {
     List<User> findAll(); // 모든 유저 검색
     void updateUser(User user); //유저 정보 업데이트
     void deleteUser(Long userNumber); // 유저 번호로 유저 삭제 but 비밀번호 필요
+    Optional<User> login(User user); // 유저 로그인
 }

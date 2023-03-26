@@ -2,7 +2,7 @@ package clothes.ecommerce.controller;
 
 import clothes.ecommerce.domain.product.Product;
 import clothes.ecommerce.domain.user.User;
-import clothes.ecommerce.message.Message;
+import clothes.ecommerce.responseentity.Message;
 import clothes.ecommerce.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

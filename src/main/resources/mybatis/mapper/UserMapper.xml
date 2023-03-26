@@ -17,6 +17,10 @@
         select * from users
     </select>
 
+    <select id="login" resultType="User">
+        select * from users where userId = #{userId} and userPassword = #{userPassword}
+    </select>
+
     <insert id="createUser" useGeneratedKeys="true" keyProperty="userNumber">
         insert into users(userId, userPassword, userName, userAddress, bankAccount, bankAccountAmount)
         values(#{userId}, #{userPassword}, #{userName}, #{userAddress}, #{bankAccount}, #{bankAccountAmount})

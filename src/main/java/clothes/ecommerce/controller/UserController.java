@@ -1,8 +1,7 @@
 package clothes.ecommerce.controller;
 
 import clothes.ecommerce.domain.user.User;
-import clothes.ecommerce.domain.user.UserMapper;
-import clothes.ecommerce.message.Message;
+import clothes.ecommerce.responseentity.Message;
 import clothes.ecommerce.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -94,7 +92,7 @@ public class UserController {
             Optional<User> user = (Optional<User>) object;
             if(user.orElse(null) == null) {
                 message.setMessage("존재하지 않는 데이터입니다.");
-                return new ResponseEntity<>(message, HttpStatus.OK);
+                return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
             }
 
             else {
@@ -108,7 +106,7 @@ public class UserController {
             List<User> users = (List<User>) object;
             if(users.isEmpty()) {
                 message.setMessage("존재하지 않는 데이터입니다.");
-                return new ResponseEntity<>(message, HttpStatus.OK);
+                return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
             }
 
             else {
