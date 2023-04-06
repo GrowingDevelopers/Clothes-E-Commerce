@@ -5,10 +5,6 @@
         select * from users where userNumber = #{userNumber}
     </select>
 
-    <select id="findByUserName" resultType="User" parameterType="String">
-        select * from users where userName = #{userName}
-    </select>
-
     <select id="findByUserId" resultType="User" parameterType="String">
         select * from users where userId = #{userId}
     </select>

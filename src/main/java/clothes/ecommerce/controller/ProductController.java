@@ -1,11 +1,11 @@
 package clothes.ecommerce.controller;
 
 import clothes.ecommerce.domain.product.Product;
-import clothes.ecommerce.domain.user.User;
-import clothes.ecommerce.responseentity.Message;
+import clothes.ecommerce.exception.CustomException;
+import clothes.ecommerce.exception.ErrorCode;
+import clothes.ecommerce.responseentity.MessageResponse;
 import clothes.ecommerce.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,11 +37,11 @@ public class ProductController {
      * @return getMessageResponseEntity(product, message)
      */
     @GetMapping("/search/productNumber")
-    public ResponseEntity<Message> searchByProductNumber(@RequestBody Long productNumber) {
-        Optional<Product> product = productService.findProductByProductNumber(productNumber);
-        Message message = new Message();
+    public ResponseEntity<?> searchByProductNumber(@RequestBody Long productNumber) {
+        Product product = productService.findProductByProductNumber(productNumber)
+                .orElseThrow(() -> new CustomException(ErrorCode.DATA_NOT_FOUND));
 
-        return getMessageResponseEntity(product, message);
+        return MessageResponse.toFindResponseEntity(product);
     }
 
     /**
@@ -50,11 +50,14 @@ public class ProductController {
      * @return getMessageResponseEntity(product, message)
      */
     @GetMapping("/search/productName")
-    public ResponseEntity<Message> searchByProductName(@RequestBody String productName) {
-        List<Product> product = productService.findProductByProductName(productName);
-        Message message = new Message();
+    public ResponseEntity<?> searchByProductName(@RequestBody String productName) {
+        List<Product> products = productService.findProductByProductName(productName);
 
-        return getMessageResponseEntity(product, message);
+        if(products == null || products.isEmpty()) {
+            throw new CustomException(ErrorCode.DATA_NOT_FOUND);
+        }
+
+        return MessageResponse.toFindResponseEntity(products);
     }
 
     /**
@@ -64,38 +67,6 @@ public class ProductController {
     @GetMapping("/search/product")
     public List<Product> searchProductAll() {
         return productService.findProductAll();
-    }
-
-    private ResponseEntity<Message> getMessageResponseEntity(Object object, Message message) {
-        if(object instanceof Optional) {
-            Optional<User> user = (Optional<User>) object;
-            if(user.orElse(null) == null) {
-                message.setMessage("존재하지 않는 데이터입니다.");
-                return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-            }
-
-            else {
-                message.setMessage("검색에 성공하였습니다.");
-                message.setData(user);
-                return new ResponseEntity<>(message, HttpStatus.OK);
-            }
-        }
-
-        if(object instanceof List) {
-            List<User> users = (List<User>) object;
-            if(users.isEmpty()) {
-                message.setMessage("존재하지 않는 데이터입니다.");
-                return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-            }
-
-            else {
-                message.setMessage("검색에 성공하였습니다.");
-                message.setData(users);
-                return new ResponseEntity<>(message, HttpStatus.OK);
-            }
-        }
-
-        return null;
     }
 
     /**

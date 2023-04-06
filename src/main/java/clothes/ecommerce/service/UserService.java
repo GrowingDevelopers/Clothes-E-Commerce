@@ -2,7 +2,6 @@ package clothes.ecommerce.service;
 
 import clothes.ecommerce.domain.user.User;
 import clothes.ecommerce.domain.user.UserMapper;
-import clothes.ecommerce.responseentity.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,31 +16,15 @@ public class UserService {
     private final UserMapper userMapper;
 
     // 회원 가입 메소드
-     public boolean joinUser(User user) {
-         try {
-             validateDuplicateUserId(user);
-             userMapper.createUser(user);
-             return true;
-         } catch(IllegalStateException e) {
-            return false;
-         }
-     }
-     // 중복 아이디 검증
-     private void validateDuplicateUserId(User user) {
-        userMapper.findByUserId(user.getUserId())
-                .ifPresent(u -> {
-                    throw new IllegalStateException("이미 존재하는 아이디입니다.");
-                });
+     public void joinUser(User user) {
+         userMapper.createUser(user);
      }
 
      // 유저 번호로 유저 검색
     public Optional<User> findUserByUserNumber(Long userNumber) {
          return userMapper.findByUserNumber(userNumber);
     }
-    // 유저 이름으로 유저 검색
-    public List<User> findUserByUserName(String userName) {
-        return userMapper.findByUserName(userName);
-    }
+
     // 유저 아이디로 유저 검색
     public Optional<User> findUserByUserId(String userId) {
          return userMapper.findByUserId(userId);
