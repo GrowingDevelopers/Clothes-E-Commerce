@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="clothes.ecommerce.domain.product.ProductMapper">
+    <select id="findByProductNumber" resultType="Product" parameterType="Long">
+        select * from product where productNumber = #{productNumber}
+    </select>
+
+    <select id="findByProductName" resultType="Product" parameterType="String">
+        select * from product where productName = #{productName}
+    </select>
+
+    <select id="findAll" resultType="Product">
+        select * from product
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="productNumber">
+        insert into product(price, productStock, productName, size, color, productSellAmount)
+        values(#{price}, #{productStock}, #{productName}, #{size}, #{color}, #{productSellAmount})
+    </insert>
+
+    <update id="update">
+        update product set
+                         price = #{price},
+                         productName = #{productName} where productNumber = #{productNumber}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        delete from product where productNumber = #{productNumber}
+    </delete>
+</mapper>

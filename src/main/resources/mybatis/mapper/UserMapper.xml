@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="clothes.ecommerce.domain.user.UserMapper">
+    <select id="findByUserNumber" resultType="User" parameterType="Long">
+        select * from users where userNumber = #{userNumber}
+    </select>
+
+    <select id="findByUserId" resultType="User" parameterType="String">
+        select * from users where userId = #{userId}
+    </select>
+
+    <select id="findAll" resultType="User">
+        select * from users
+    </select>
+
+    <select id="login" resultType="User">
+        select * from users where userId = #{userId} and userPassword = #{userPassword}
+    </select>
+
+    <insert id="createUser" useGeneratedKeys="true" keyProperty="userNumber">
+        insert into users(userId, userPassword, userName, userAddress, bankAccount, bankAccountAmount)
+        values(#{userId}, #{userPassword}, #{userName}, #{userAddress}, #{bankAccount}, #{bankAccountAmount})
+    </insert>
+
+    <update id="updateUser">
+        update users set
+                         userPassword = #{userPassword},
+                         userName = #{userName},
+                         userAddress = #{userAddress},
+                         bankAccount = #{bankAccount},
+                         bankAccountAmount = #{bankAccountAmount} where userNumber = #{userNumber}
+    </update>
+
+    <delete id="deleteUser" parameterType="Long">
+        delete from users where userNumber = #{userNumber}
+    </delete>
+</mapper>
